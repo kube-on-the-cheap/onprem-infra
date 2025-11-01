@@ -1,5 +1,10 @@
 keys:
   - &Marco B31C0D06E2C1EB5A
+  - &Marco_backup age1afmdvukptgq0g69hmvkj8pc5juda2v753tfyxnsmcj22q03je5rqz7mt52
 creation_rules:
   - path_regex: ^.*\.sops(?:\.yaml)$
-    pgp: *Marco
+    key_groups:
+      - pgp:
+          - *Marco
+        age:
+          - *Marco_backup
