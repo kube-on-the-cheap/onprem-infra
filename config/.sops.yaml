@@ -1,0 +1,5 @@
+keys:
+  - &Marco B31C0D06E2C1EB5A
+creation_rules:
+  - path_regex: ^.*\.sops(?:\.yaml)$
+    pgp: *Marco
