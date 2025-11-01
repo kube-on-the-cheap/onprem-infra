@@ -3,8 +3,8 @@ resource "routeros_ip_dns" "dns" {
 }
 
 resource "routeros_ip_dns_record" "router" {
-  name    = "router.lan"
+  name    = "edge.caravhouse.local"
   address = "192.168.20.1"
   type    = "A"
-  comment = "defconf"
+  comment = "Name of the router"
 }

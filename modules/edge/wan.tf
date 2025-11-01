@@ -18,13 +18,12 @@ resource "routeros_interface_pppoe_client" "wan" {
 
 resource "routeros_interface_list" "wan" {
   name    = "WAN"
-  comment = "defconf"
+  comment = "All WAN-facing interfaces"
 }
 
 resource "routeros_interface_list_member" "wan_ether1" {
   interface = "ether1"
   list      = routeros_interface_list.wan.name
-  comment   = "defconf"
 }
 
 resource "routeros_interface_list_member" "wan_pppoe" {
