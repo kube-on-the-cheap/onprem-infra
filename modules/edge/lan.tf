@@ -23,10 +23,16 @@ resource "routeros_interface_list_member" "lan_bridge" {
 }
 
 locals {
-  lan_interfaces = concat(
-    [ for x in range(2,9): format("ether%s",x) ],
-    [ "sfp-sfpplus1" ]
-  )
+  lan_interfaces = [ 
+      routeros_interface_ethernet.ether2.name, 
+      routeros_interface_ethernet.ether3.name, 
+      routeros_interface_ethernet.ether4.name, 
+      routeros_interface_ethernet.ether5.name, 
+      routeros_interface_ethernet.ether6.name, 
+      routeros_interface_ethernet.ether7.name, 
+      routeros_interface_ethernet.ether8.name, 
+      routeros_interface_ethernet.sfp-sfpplus1.name 
+    ]
 }
 
 # Bridge ports - all LAN interfaces connected to the bridge
@@ -36,17 +42,3 @@ resource "routeros_interface_bridge_port" "lan_interfaces" {
   interface = each.value
   comment = "Interface ${each.value} belongs to the LAN bridge"
 }
-
-# INFO: for comparison, you can do the explicit format, but for the bridge assignment it doesn't make much sense
-#
-# resource "routeros_interface_bridge_port" "ether2" {
-#   bridge    = routeros_interface_bridge.lan.name
-#   interface = "ether2"
-#   comment   = "defconf"
-# }
-#
-# resource "routeros_interface_bridge_port" "ether3" {
-#   bridge    = routeros_interface_bridge.lan.name
-#   interface = "ether3"
-#   comment   = "defconf"
-# }
