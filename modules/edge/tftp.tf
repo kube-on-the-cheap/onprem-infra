@@ -2,13 +2,22 @@
 #
 # TFTP is used only for initial iPXE bootloader download (~1MB)
 # Large files (kernel/initrd) are served via HTTP for better performance
-
-# Note: TFTP service is always enabled on MikroTik RouterOS
-# It cannot be disabled via Terraform, but can be controlled via:
-#   /ip tftp print
-#   /tool fetch tftp://192.168.20.1/boot/ipxe-arm64.efi
 #
-# The TFTP server automatically serves files from the root directory (/)
+# IMPORTANT: The TFTP server can ONLY serve files from internal flash storage (/)
+# It CANNOT serve files from USB drives (usb1-part1, usb1-part2, etc.)
+# Bootloader files must be copied to /boot on internal flash for TFTP access
+#
+# CRITICAL: TFTP server requires at least one access rule to start
+# Without rules configured, the TFTP server will not start at boot
+
+# TFTP Access Rule - Allow serving files from root directory
+# This rule is required for the TFTP server to start
+resource "routeros_ip_tftp" "allow_all" {
+  req_filename  = ".*"
+  real_filename = "/"
+  allow         = true
+  read_only     = true
+}
 
 # TFTP Settings - Performance optimization
 resource "routeros_ip_tftp_settings" "this" {

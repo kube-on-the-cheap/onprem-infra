@@ -95,7 +95,35 @@ resource "routeros_system_script" "download_pxe_files" {
 
     :log info ""
     :log info "Download complete!"
-    :log info "List files with: /file print where name~\"usb1-part2/boot\""
+    :log info ""
+    :log info "Copying bootloaders to internal flash for TFTP access..."
+    :log info "(TFTP cannot serve files from USB drives)"
+    :log info ""
+
+    # Create boot directory on internal flash
+    :do {
+      /file/make-directory name=boot
+      :log info "Created /boot directory"
+    } on-error={
+      :log info "Directory /boot already exists"
+    }
+
+    # Copy bootloaders from USB to internal flash
+    # TFTP can only serve files from internal flash, not USB drives
+    :foreach bootfile in={"ipxe-arm64.efi";"ipxe-x86_64.efi";"undionly.kpxe";"snponly-arm64.efi";"snponly.efi"} do={
+      :local srcPath ("usb1-part2/boot/" . $bootfile)
+      :local dstPath ("boot/" . $bootfile)
+      :do {
+        /file/copy src=$srcPath dst=$dstPath
+        :log info ("Copied " . $bootfile . " to internal flash")
+      } on-error={
+        :log error ("Failed to copy " . $bootfile)
+      }
+    }
+
+    :log info ""
+    :log info "Bootloader setup complete!"
+    :log info "List files with: /file print where name~\"boot\""
     :log info ""
     :log info "Next: Extract kexec images (on your computer and upload via SCP):"
     :log info "  # ARM64:"

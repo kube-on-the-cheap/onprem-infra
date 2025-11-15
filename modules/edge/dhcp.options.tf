@@ -1,7 +1,13 @@
-# DHCP Server Options for PXE Boot - Architecture-aware
-# Points to Mikrotik itself for PXE/TFTP services
+# DHCP Server Options for PXE Boot
 #
-# Client Architecture Types (Option 93):
+# These options are used in option sets assigned to specific clients via static leases.
+#
+# IMPORTANT: Do NOT set next-server or boot-file-name in the network definition (dhcp.tf)
+# "If there is an option present in the network definition (even if it is not set),
+# then setting an option with the proper code is useless."
+# - https://blog.xentoo.info/2013/12/22/mikrotik-dhcp-and-pxe-boot/
+#
+# Client Architecture Types (Option 93) - for reference:
 # 0x0000 = x86 BIOS
 # 0x0006 = x86 UEFI (32-bit)
 # 0x0007 = x86_64 UEFI (64-bit)
@@ -17,27 +23,26 @@ resource "routeros_ip_dhcp_server_option" "next_server" {
 }
 
 # Boot file options for different architectures
-# These will be matched via DHCP server matcher
 
 # x86 BIOS (legacy)
 resource "routeros_ip_dhcp_server_option" "boot_file_x86_bios" {
   name  = "boot-file-x86-bios"
   code  = 67
-  value = "s'usb1-part2/boot/undionly.kpxe'"
+  value = "s'boot/undionly.kpxe'"
 }
 
 # x86_64 UEFI
 resource "routeros_ip_dhcp_server_option" "boot_file_x86_64_uefi" {
   name  = "boot-file-x86-64-uefi"
   code  = 67
-  value = "s'usb1-part2/boot/ipxe-x86_64.efi'"
+  value = "s'boot/ipxe-x86_64.efi'"
 }
 
 # ARM64 UEFI (Raspberry Pi 4)
 resource "routeros_ip_dhcp_server_option" "boot_file_arm64_uefi" {
   name  = "boot-file-arm64-uefi"
   code  = 67
-  value = "s'usb1-part2/boot/ipxe-arm64.efi'"
+  value = "s'boot/ipxe-arm64.efi'"
 }
 
 # # ARM32 UEFI (older Raspberry Pi models)
