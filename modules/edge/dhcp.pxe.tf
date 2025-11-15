@@ -23,21 +23,21 @@ resource "routeros_ip_dhcp_server_option" "next_server" {
 resource "routeros_ip_dhcp_server_option" "boot_file_x86_bios" {
   name  = "boot-file-x86-bios"
   code  = 67
-  value = "s'usb1/boot/undionly.kpxe'"
+  value = "s'usb1-part2/boot/undionly.kpxe'"
 }
 
 # x86_64 UEFI
 resource "routeros_ip_dhcp_server_option" "boot_file_x86_64_uefi" {
   name  = "boot-file-x86-64-uefi"
   code  = 67
-  value = "s'usb1/boot/ipxe-x86_64.efi'"
+  value = "s'usb1-part2/boot/ipxe-x86_64.efi'"
 }
 
 # ARM64 UEFI (Raspberry Pi 4)
 resource "routeros_ip_dhcp_server_option" "boot_file_arm64_uefi" {
   name  = "boot-file-arm64-uefi"
   code  = 67
-  value = "s'usb1/boot/ipxe-arm64.efi'"
+  value = "s'usb1-part2/boot/ipxe-arm64.efi'"
 }
 
 # # ARM32 UEFI (older Raspberry Pi models)

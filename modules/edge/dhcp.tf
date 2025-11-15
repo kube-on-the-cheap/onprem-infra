@@ -15,7 +15,7 @@ resource "routeros_ip_dhcp_server_network" "lan" {
   address = "192.168.20.0/24"
   # Default boot file (fallback if no matcher applies)
   # Using x86_64 UEFI as default since most modern systems are x86_64
-  boot_file_name = "usb1/boot/ipxe-x86_64.efi"
+  boot_file_name = "usb1-part2/boot/ipxe-x86_64.efi"
   dns_server     = ["192.168.20.1"] # Use Mikrotik for DNS
   gateway        = "192.168.20.1"
   netmask        = 24

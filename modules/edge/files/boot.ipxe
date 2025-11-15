@@ -1,0 +1,34 @@
+#!ipxe
+
+echo ========================================
+echo NixOS Network Installer
+echo ========================================
+echo
+echo MAC: ${net0/mac}
+echo IP: ${net0/ip}
+echo Architecture: ${buildarch}
+echo
+
+# Set base URL to MikroTik's IP
+set base-url http://192.168.20.1/usb1-part2/boot/nixos-kexec
+
+# Detect architecture and set kexec path
+iseq ${buildarch} arm64 && set arch aarch64 || goto check_x86
+goto boot
+
+:check_x86
+iseq ${buildarch} x86_64 && set arch x86_64 || goto unsupported
+goto boot
+
+:boot
+echo Fetching NixOS kexec installer for ${arch}...
+kernel ${base-url}/${arch}/bzImage init=/nix/store/*/init loglevel=4
+initrd ${base-url}/${arch}/initrd
+
+echo Booting NixOS installer...
+boot
+
+:unsupported
+echo ERROR: Unsupported architecture: ${buildarch}
+echo Supported architectures: arm64 (aarch64), x86_64
+shell

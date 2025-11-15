@@ -1,0 +1,3 @@
+# iPXE bootloaders are binary files
+*.efi binary
+*.kpxe binary
