@@ -27,6 +27,14 @@ resource "routeros_ip_dhcp_server_lease" "simpleton" {
   comment     = "simpleton"
 }
 
+resource "routeros_ip_dhcp_server_lease" "minipc" {
+  address     = "192.168.20.112"
+  mac_address = "48:21:0B:37:9E:00"
+  # client_id   = "1:48:21:0b:37:9e:00"
+  server      = routeros_ip_dhcp_server.dhcp_server.name
+  comment     = "minipc"
+}
+
 resource "routeros_ip_dhcp_server_lease" "rainbowparty" {
   address     = "192.168.20.125"
   mac_address = "3C:7C:3F:1D:81:66"
