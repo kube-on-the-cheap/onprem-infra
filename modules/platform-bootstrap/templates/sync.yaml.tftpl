@@ -1,0 +1,9 @@
+instance:
+  sync:
+    name: platform
+    kind: GitRepository
+    url: ${repo}
+    ref: refs/heads/${ref}
+    path: ${path}
+    # NOTE: not used today, as the config repo is public
+    # pullSecret:
