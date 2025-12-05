@@ -11,7 +11,8 @@ locals {
 }
 
 inputs = {
-  flux_version = "2.5.x"
+  flux_version = "2.7.x"
+  flux_operator_version = "0.36.0"
   sync = {
     repo = "https://github.com/kube-on-the-cheap/platform"
     path = "clusters/understairs"

@@ -7,7 +7,7 @@ instance:
     patches:
       - target:
           kind: Deployment
-          name: "(kustomize-controller|helm-controller)"
+          name: (kustomize-controller|helm-controller)
         patch: |
           - op: add
             path: /spec/template/spec/containers/0/args/-
@@ -17,8 +17,8 @@ instance:
             value: --requeue-dependency=10s
       - target:
           kind: Deployment
-          name: "kustomize-controller"
+          name: kustomize-controller
         patch: |
           - op: add
             path: /spec/template/spec/containers/0/args/-
-            value: --decryption-secret=encryption-key
+            value: --sops-age-secret=encryption-key
