@@ -7,12 +7,14 @@ include "general" {
 }
 
 locals {
-  age_key = join("",[ for line in split("\n",sops_decrypt_file("./age.agekey.sops")): line if ! startswith(line, "#") ])
+  age_key = join("", [for line in split("\n", sops_decrypt_file("./age.agekey.sops")) : line if !startswith(line, "#")])
 }
 
 inputs = {
-  flux_version = "2.7.x"
-  flux_operator_version = "0.36.0"
+  flux_version          = "2.7.x"
+  flux_operator_version = "0.37.1"
+  cilium_version        = "1.18.5"
+  cluster_name          = "understairs"
   sync = {
     repo = "https://github.com/kube-on-the-cheap/platform"
     path = "clusters/understairs"

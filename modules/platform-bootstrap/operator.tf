@@ -1,5 +1,5 @@
 variable "flux_operator_version" {
-  type = string
+  type        = string
   description = "The Flux Operator version to install"
 }
 

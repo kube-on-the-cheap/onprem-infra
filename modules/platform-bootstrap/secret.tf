@@ -1,12 +1,12 @@
 variable "secret_key" {
   description = "The secret decryption key"
-  type = string
-  sensitive = true
+  type        = string
+  sensitive   = true
 }
 
 resource "kubernetes_secret" "encryption_key" {
   metadata {
-    name = "encryption-key"
+    name      = "encryption-key"
     namespace = "flux-system"
   }
 
@@ -15,5 +15,5 @@ resource "kubernetes_secret" "encryption_key" {
   }
 
   # NOTE: this will also create the namespace
-  depends_on = [ helm_release.flux_instance ]
+  depends_on = [helm_release.flux_instance]
 }
