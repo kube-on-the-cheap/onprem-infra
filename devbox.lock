@@ -49,6 +49,54 @@
         }
       }
     },
+    "cilium-cli@latest": {
+      "last_modified": "2025-11-23T21:50:36Z",
+      "resolved": "github:NixOS/nixpkgs/ee09932cedcef15aaf476f9343d1dea2cb77e261#cilium-cli",
+      "source": "devbox-search",
+      "version": "0.18.8",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/arrn3yh7cf7rp8ydqh1w60ry5wb9c6nh-cilium-cli-0.18.8",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/arrn3yh7cf7rp8ydqh1w60ry5wb9c6nh-cilium-cli-0.18.8"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/qahfw3s2gn3ggalgwp2h9y667m5fr5xr-cilium-cli-0.18.8",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/qahfw3s2gn3ggalgwp2h9y667m5fr5xr-cilium-cli-0.18.8"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/ljdqda5fvrvc5fln0g9rcyfpj65f02rf-cilium-cli-0.18.8",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/ljdqda5fvrvc5fln0g9rcyfpj65f02rf-cilium-cli-0.18.8"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/rbn2sksain1wzmxjjfpmc0slkdhbbb36-cilium-cli-0.18.8",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/rbn2sksain1wzmxjjfpmc0slkdhbbb36-cilium-cli-0.18.8"
+        }
+      }
+    },
     "direnv@2.35.0": {
       "last_modified": "2025-03-23T05:31:05Z",
       "resolved": "github:NixOS/nixpkgs/dd613136ee91f67e5dba3f3f41ac99ae89c5406b#direnv",

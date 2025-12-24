@@ -21,7 +21,8 @@
     "doctl@1.122.0",
     "go-task@3.41.0",
     "sops@latest",
-    "age@latest"
+    "age@latest",
+    "cilium-cli@latest"
   ],
   "shell": {
     "init_hook": [
