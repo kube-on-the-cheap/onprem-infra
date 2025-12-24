@@ -27,5 +27,10 @@ resource "helm_release" "cilium" {
       condition     = one(data.kubernetes_namespace.kube_system.metadata.*.uid) != null
       error_message = "Unable to get the kube-system namespace. Check the connection to the API Server and/or the permissions for the user in your kubeconfig."
     }
+    # Ignore changes after initial creation - let Flux manage it
+    ignore_changes = [
+      values,
+      version
+    ]
   }
 }

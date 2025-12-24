@@ -7,7 +7,7 @@ include "general" {
 }
 
 locals {
-  age_key = join("", [for line in split("\n", sops_decrypt_file("./age.agekey.sops")) : line if !startswith(line, "#")])
+  age_key = join("", [for line in split("\n", sops_decrypt_file("./understairs.agekey.sops")) : line if !startswith(line, "#")])
 }
 
 inputs = {

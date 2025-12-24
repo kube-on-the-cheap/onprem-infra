@@ -1,4 +1,0 @@
-creation_rules:
-  - path_regex: ^age\.agekey(?:\.sops)*$
-    pgp: B31C0D06E2C1EB5A
-    encrypted-suffix: .sops
