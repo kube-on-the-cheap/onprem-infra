@@ -3,8 +3,7 @@ keys:
   - &Marco_pgp_b 67E1798C7B7A5D23
   - &Marco_age_backup age1k9pgstv92fnq4mpupu2msd9j7zvv96l07ueqfckrv3nwq94t7vzq7typqx
 creation_rules:
-  - path_regex: ^age\.agekey(?:\.sops)*$
-    encrypted-suffix: .sops
+  - path_regex: ^.*\.sops(?:\.yaml)$
     key_groups:
       - pgp:
           - *Marco_pgp_a

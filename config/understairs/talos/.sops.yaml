@@ -1,11 +1,13 @@
 keys:
-  - &Marco_pgp CBEB44B1E9FD46F3C052496E0C43126B9A9CD273
+  - &Marco_pgp_a B31C0D06E2C1EB5A
+  - &Marco_pgp_b 67E1798C7B7A5D23
   - &Marco_age_backup age1k9pgstv92fnq4mpupu2msd9j7zvv96l07ueqfckrv3nwq94t7vzq7typqx
 creation_rules:
   - path_regex: .*\.talos.*\.yaml$
     encrypted_regex: ^(token|secret|key|secretboxEncryptionSecret)$
     key_groups:
       - pgp:
-          - *Marco_pgp
+          - *Marco_pgp_a
+          - *Marco_pgp_b
         age:
           - *Marco_age_backup
