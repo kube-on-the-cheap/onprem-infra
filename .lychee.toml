@@ -1,0 +1,28 @@
+# Lychee link checker configuration
+# https://lychee.cli.rs/configuration/
+
+# Use a browser-like user-agent to avoid being blocked
+user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+
+# Accept 2xx and 4xx (some sites return 403/429 for bots even with good UA)
+accept = ["2xx", "403", "429"]
+
+# Exclude example/placeholder URLs from Talos config comments
+exclude = [
+    "^https?://registry\\.insecure",
+    "^https?://SERVER:PORT",
+    "^https?://USERNAME:PASSWORD@SERVER:PORT",
+    "^https?://domain/?$",
+    "^https?://\\d+\\.\\d+\\.\\d+\\.\\d+:\\d+",  # IP:port placeholders
+    "^https?://example\\.com",
+    "^https?://www\\.example\\.com",
+    "^https?://192\\.168\\.",  # Local network IPs
+    "^https?://10\\.",
+    "^https?://172\\.(1[6-9]|2[0-9]|3[0-1])\\.",
+]
+
+# Timeout per request
+timeout = 30
+
+# Max retries
+max_retries = 3

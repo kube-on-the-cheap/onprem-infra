@@ -2,95 +2,104 @@ version: v1alpha1
 debug: false
 persist: true
 machine:
-    type: worker
-    token: ENC[AES256_GCM,data:m+Jhjn3FzRWRW5dDjJToIkah7JAs7h0=,iv:TrFkXY41WuLQIA0xGc2gPxOaBDvIxNsR9u3zXSK9DP0=,tag:7FhRphqk6Lie9Ev8OnRU6w==,type:str]
-    ca:
-        crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJQekNCOHFBREFnRUNBaEVBdWh6OW5IRHFOanFjQTNDRkhoRkZrakFGQmdNclpYQXdFREVPTUF3R0ExVUUKQ2hNRmRHRnNiM013SGhjTk1qVXdPREkwTVRVek56TTJXaGNOTXpVd09ESXlNVFV6TnpNMldqQVFNUTR3REFZRApWUVFLRXdWMFlXeHZjekFxTUFVR0F5dGxjQU1oQUJXWk52ekUzK2RLanJKYjA2UzV0N0JUdXd6TFlGVUNGZHNjCjlRdzduM3IzbzJFd1h6QU9CZ05WSFE4QkFmOEVCQU1DQW9Rd0hRWURWUjBsQkJZd0ZBWUlLd1lCQlFVSEF3RUcKQ0NzR0FRVUZCd01DTUE4R0ExVWRFd0VCL3dRRk1BTUJBZjh3SFFZRFZSME9CQllFRkRaTncyb2IvK0NQbzJSTQp6My9hWVEwK0VBR21NQVVHQXl0bGNBTkJBREtSTzBRYlByUDFscGdleHFodFk0d09ZUFpiaVJoVjEzeXJYQUc5CmUxeE00N212M1VCeStvcWRSL0diQ044RmdoS1VpNUJhMExCVExLYitacGF6MUFrPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
-    certSANs: []
-    kubelet:
-        image: ghcr.io/siderolabs/kubelet:v1.33.0
-        defaultRuntimeSeccompProfileEnabled: true
-        disableManifestsDirectory: true
-    network:
-        hostname: minipc1
-    install:
-        disk: /dev/sda
-        image: ghcr.io/siderolabs/installer:v1.10.1
-        wipe: false
-    registries: {}
-    features:
-        rbac: true
-        stableHostname: true
-        apidCheckExtKeyUsage: true
-        diskQuotaSupport: true
-        kubePrism:
-            enabled: true
-            port: 7445
-        hostDNS:
-            enabled: true
-            forwardKubeDNSToHost: true
-    kernel:
-        modules:
-            - name: uio_pci_generic
-            - name: vfio_pci
-            - name: nvme_tcp
+  type: worker
+  token: ENC[AES256_GCM,data:Qxi2WcCOypJ08WqiaNBAhObjVQPh30U=,iv:7Emc/3t7n7YMY00kSASMkuvSZfzfJK1m8aDlU89EROg=,tag:XOyDuOXzYpPXhpf8St3Nog==,type:str]
+  ca:
+    crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJQekNCOHFBREFnRUNBaEVBdWh6OW5IRHFOanFjQTNDRkhoRkZrakFGQmdNclpYQXdFREVPTUF3R0ExVUUKQ2hNRmRHRnNiM013SGhjTk1qVXdPREkwTVRVek56TTJXaGNOTXpVd09ESXlNVFV6TnpNMldqQVFNUTR3REFZRApWUVFLRXdWMFlXeHZjekFxTUFVR0F5dGxjQU1oQUJXWk52ekUzK2RLanJKYjA2UzV0N0JUdXd6TFlGVUNGZHNjCjlRdzduM3IzbzJFd1h6QU9CZ05WSFE4QkFmOEVCQU1DQW9Rd0hRWURWUjBsQkJZd0ZBWUlLd1lCQlFVSEF3RUcKQ0NzR0FRVUZCd01DTUE4R0ExVWRFd0VCL3dRRk1BTUJBZjh3SFFZRFZSME9CQllFRkRaTncyb2IvK0NQbzJSTQp6My9hWVEwK0VBR21NQVVHQXl0bGNBTkJBREtSTzBRYlByUDFscGdleHFodFk0d09ZUFpiaVJoVjEzeXJYQUc5CmUxeE00N212M1VCeStvcWRSL0diQ044RmdoS1VpNUJhMExCVExLYitacGF6MUFrPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+  certSANs: []
+  kubelet:
+    image: ghcr.io/siderolabs/kubelet:v1.33.0
+    defaultRuntimeSeccompProfileEnabled: true
+    disableManifestsDirectory: true
+    extraMounts:
+      - destination: /var/mnt/openebs-rawfiles
+        type: bind
+        source: /var/mnt/openebs-rawfiles
+        options:
+          - bind
+          - rshared
+          - rw
+  network:
+    hostname: minipc1
+  install:
+    disk: /dev/sda
+    image: ghcr.io/siderolabs/installer:v1.10.1
+    wipe: false
+  registries: {}
+  features:
+    rbac: true
+    stableHostname: true
+    apidCheckExtKeyUsage: true
+    diskQuotaSupport: true
+    kubePrism:
+      enabled: true
+      port: 7445
+    hostDNS:
+      enabled: true
+      forwardKubeDNSToHost: true
+  kernel:
+    modules:
+      - name: uio_pci_generic
+      - name: vfio_pci
+      - name: nvme_tcp
 cluster:
-    id: 4LIl1i1ULF2cBcU57RDbqrSkyxXQu5k_S29ffunxilY=
-    secret: ENC[AES256_GCM,data:3iRabINSB50AIhs8wMtA6SYuXFUiFDfKh96+ZUQKiMK2ZDewhZ8lf3i38zs=,iv:itkqeNjUE3kC+SvYNoScVVLWFCabquFZyxEwsa+/Teg=,tag:dV13YlltPuPiPQKJ0IjBZQ==,type:str]
-    controlPlane:
-        endpoint: https://192.168.20.115:6443
-    clusterName: understairs
-    network:
-        cni:
-            name: none
-        dnsDomain: cluster.local
-        podSubnets:
-            - 10.244.0.0/16
-        serviceSubnets:
-            - 10.96.0.0/12
-    token: ENC[AES256_GCM,data:3IAp6t7E7eGHO6zpYL3JqrY+RX8gSYI=,iv:qjMDgnAZeb+7Ea5Cj2v3K6kDBQO6dleQhLkkw/bPuOs=,tag:So8DMOsnNC66BI3/bEFOeg==,type:str]
-    ca:
-        crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJpRENDQVMrZ0F3SUJBZ0lRWUN3SzJWTjVON3pHSHZFbzJMdGJFakFLQmdncWhrak9QUVFEQWpBVk1STXcKRVFZRFZRUUtFd3ByZFdKbGNtNWxkR1Z6TUI0WERUSTFNRGd5TkRFMU16Y3pObG9YRFRNMU1EZ3lNakUxTXpjegpObG93RlRFVE1CRUdBMVVFQ2hNS2EzVmlaWEp1WlhSbGN6QlpNQk1HQnlxR1NNNDlBZ0VHQ0NxR1NNNDlBd0VICkEwSUFCQ3N0b2R3Ykw2ZEl5eFRaVWJnMnIrSEx0SFMrV3JDK0wweEVsM2ZUUEkwekZXcjhDMm9QSnJTdXRTdzcKaWNYSXFmODB2aW85Nm5OQXdEUEI3MnBEaE1XallUQmZNQTRHQTFVZER3RUIvd1FFQXdJQ2hEQWRCZ05WSFNVRQpGakFVQmdnckJnRUZCUWNEQVFZSUt3WUJCUVVIQXdJd0R3WURWUjBUQVFIL0JBVXdBd0VCL3pBZEJnTlZIUTRFCkZnUVVPVmJ5RWFSWDNEdk9QSS80Q2FoSnAwNkhadEl3Q2dZSUtvWkl6ajBFQXdJRFJ3QXdSQUlnSHRMOFB5OW4KVzBBSkNXcGg0N21MakRkSmpoR3FoRTVNaHNQM0JRNGxwRzRDSUV2RXNsWExldEVvdlJxVVo3ZEF3RHBXcVJ1eQo3VGc5WnE3TWw0TTJvMzhXCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
-    discovery:
-        enabled: true
-        registries:
-            kubernetes:
-                disabled: false
-            service:
-                disabled: false
+  id: 4LIl1i1ULF2cBcU57RDbqrSkyxXQu5k_S29ffunxilY=
+  secret: ENC[AES256_GCM,data:BDCaWILDfuIqXBcGsYnRgTNSiJTYoDnX4KybsAJc/yKRh0kWw87GjUd4Qi4=,iv:OJUNSeVF3Qz6OS+iZ6JtROJM7OII3owxR4wGGzRTfFU=,tag:6O8EtmOPQmni/M1vcU4sUA==,type:str]
+  controlPlane:
+    endpoint: https://192.168.20.115:6443
+  clusterName: understairs
+  network:
+    cni:
+      name: none
+    dnsDomain: cluster.local
+    podSubnets:
+      - 10.244.0.0/16
+    serviceSubnets:
+      - 10.96.0.0/12
+  token: ENC[AES256_GCM,data:htQnU2gH0Q6/EtYqhhYVejSXvh5xoag=,iv:V5x6Lx/46GAPcqV5+Wr/7a5DwK1gxSA2wgKQ94jZ80Q=,tag:Ad5+AEzUlHJyoqNkaF46PQ==,type:str]
+  ca:
+    crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJpRENDQVMrZ0F3SUJBZ0lRWUN3SzJWTjVON3pHSHZFbzJMdGJFakFLQmdncWhrak9QUVFEQWpBVk1STXcKRVFZRFZRUUtFd3ByZFdKbGNtNWxkR1Z6TUI0WERUSTFNRGd5TkRFMU16Y3pObG9YRFRNMU1EZ3lNakUxTXpjegpObG93RlRFVE1CRUdBMVVFQ2hNS2EzVmlaWEp1WlhSbGN6QlpNQk1HQnlxR1NNNDlBZ0VHQ0NxR1NNNDlBd0VICkEwSUFCQ3N0b2R3Ykw2ZEl5eFRaVWJnMnIrSEx0SFMrV3JDK0wweEVsM2ZUUEkwekZXcjhDMm9QSnJTdXRTdzcKaWNYSXFmODB2aW85Nm5OQXdEUEI3MnBEaE1XallUQmZNQTRHQTFVZER3RUIvd1FFQXdJQ2hEQWRCZ05WSFNVRQpGakFVQmdnckJnRUZCUWNEQVFZSUt3WUJCUVVIQXdJd0R3WURWUjBUQVFIL0JBVXdBd0VCL3pBZEJnTlZIUTRFCkZnUVVPVmJ5RWFSWDNEdk9QSS80Q2FoSnAwNkhadEl3Q2dZSUtvWkl6ajBFQXdJRFJ3QXdSQUlnSHRMOFB5OW4KVzBBSkNXcGg0N21MakRkSmpoR3FoRTVNaHNQM0JRNGxwRzRDSUV2RXNsWExldEVvdlJxVVo3ZEF3RHBXcVJ1eQo3VGc5WnE3TWw0TTJvMzhXCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+  discovery:
+    enabled: true
+    registries:
+      kubernetes:
+        disabled: false
+      service:
+        disabled: false
 sops:
-    age:
-        - recipient: age1k9pgstv92fnq4mpupu2msd9j7zvv96l07ueqfckrv3nwq94t7vzq7typqx
-          enc: |
-            -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB4dC95SEdCZGZCcjhZTTAy
-            VWgrbWJHUHQrajZBSHNadm8yME1OMXZFMm00CkQyZ0JleG5zMVJFdzdHeWJjditZ
-            V01LNHl6bFgwOHkyeGJzU05EUWZRYlUKLS0tIFZlZ0dSQXlGM0grbVp5OVZDSWNH
-            cWRZYUI1WXNDd1o0VVJTSVRPdjhob0kK/tKvpHxbpLfuX4s1wOAlEibcvn71+OeN
-            0v3dfnwNTwavc1crOS2RvE/W+EeCiRwIfYw4ukmhXCk5usb4qtz3NQ==
-            -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-12-20T08:49:25Z"
-    mac: ENC[AES256_GCM,data:sZyq4QTpeN2Q+9hK1+/apHxCi/MU6myD0y2rbwuBuaFd+PsznzsO0JaI7JleAkPBAQA0m/J0zjFTZRXloN/syMJ5JI4JmAsxSt5z4at5ZADRSWrOBB1wPFDzDJkWpkrlpUPKyWX8ukC3Px2LwfCTPRLWhjG0pJBAF9oBRA8CCGg=,iv:FWzyWE2P6UltaF5Ot5dszk1NRwl2jfFwdY73RizokwM=,tag:yxeeUJsTBxvjV82a7I7nHA==,type:str]
-    pgp:
-        - created_at: "2025-12-24T17:02:30Z"
-          enc: |-
-            -----BEGIN PGP MESSAGE-----
+  age:
+    - recipient: age1k9pgstv92fnq4mpupu2msd9j7zvv96l07ueqfckrv3nwq94t7vzq7typqx
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBZVlhOVFZrTlhrWVRId3VI
+        cXJGWDlDWkZWcFNkMUlEY2g5ZWhsTHhXRXpnCmVORWpwZUlubUc2R3g0THR6RjNS
+        SVFGY1ZXY1NXVVc0T2ppWDFQUlp2NWMKLS0tIHJmU3h4RGN1UHYvQXR1YmMvOUp3
+        eVVSU3h4bFlRTVJxc0wzT0VZVzlBREkKk0TBf57Q5u/U9SASWSwT+F5r5crXwIS8
+        axqBjZSGLcoU1w7UpuX2cILhHJ2npyycfpD+TwcQ6IQVFTRsEENPhw==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2026-01-06T13:28:33Z"
+  mac: ENC[AES256_GCM,data:olxyefmWxGCtVvNMbOFuOq4OFUzxnF+Rw9BYoE66YYMJ0MaQZBaix47MyzDl1X4N9d+zn8ZLABJFSOIgw45rm4PMqpvP0iwvr/MKuh7OI2V7l6prjOzlF4/5MdJb1Et668/NoUyE5aopfDWScEQ9mbZ2Y8FlKbFUw9gmKWCTVW0=,iv:3fDgizdiKGCGGkgbo8wplJNY1OTa9RKmYgAC8DQ3I3Q=,tag:0MWrdFYXOHor/PqqXCIgdg==,type:str]
+  pgp:
+    - created_at: "2026-01-06T13:28:33Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
 
-            hQIMA2fheYx7el0jAQ/9Ha//KJqEAmZV7YOMRlnkAO/oSw9ROqMcHjPAkjr7V1Hq
-            MSiytIrFxnEi49caQCQLhYR9sFDkZhBLE7SW6yqZlUx+umQiTxjmfs5AjlAA6KT5
-            P4hkWq6Od97iBbKIPG7deWHmcs7b8MxVb2q7z9bTE9nm42B5P2jnjuObBdi37cMl
-            3/knBLiqI50fFPtBYKXpQcyrSM3q/YI81V91Zp3IpndX1mUjotqC7ELhhsHBr43O
-            QqkhryzunE9TSSUKD/Om4MbJiu3Pu3jc2r5eiFwEvTAFFaxXn3HNxKeF+6TwzbhN
-            rL8QO8Nmr9d8F9JIJCI75BZuMvh6fFA+ndKbOFmExk4YInGOObl2kKMcDRO+NmcP
-            bJ9BImyMLABCia5JYZyn09N7Cw3cuFx4+vsA+6qBrL4Z014YWcuNfxm2paBCiXQF
-            z9NWFGRybrbEz/1Y5mliKO/5MwJ5HTKV2eXpPG0m9d+TjUnZPcDbB/q/25JX33eo
-            +4ZkCTvidrgfuFTs7V0AytrakgeewFvspfArd+mhg3KQs1R8KgqnnB/8/CDUy0LP
-            yMwlqvHxTvmQniAakO1ys4oJx7P2DRb54nbHTO8eT63imrXMGH+no5BjI2Q0WTFp
-            RAW+IkAE4Qt77bEQcID1xCUQo0P28a4s7u8mu3DrIMwmWELyEbPV4tsXfmaJjOHS
-            XAHFURZ/+iCuE+ECWgmXUk2OCx5cLx+Uk3EQz656PlL/Fc3It3V3n6beTy3CeBYN
-            RlaugE+QxNlYJ/hENxXFXx8T/BSB7bCSkREbFPElwH0USGOlIN+yGrNag4Sj
-            =Nl9Z
-            -----END PGP MESSAGE-----
-          fp: B31C0D06E2C1EB5A
-    encrypted_regex: ^(token|secret|key|secretboxEncryptionSecret)$
-    version: 3.11.0
+        hQIMA2fheYx7el0jARAAhqIvM/JAGBDh5hWRKyiFjREukV4Pbqo5oAh8i7Valo/X
+        TXcKIdRtS79BYRNSvaASCtrahHfwLdOVOybHghdmVsuDmYPbOx7zD+kErBDRqFbW
+        ePp2UrY8ATU4P/9VtTMJb3iToG29DMNiyD9YKv2SMzaTFYC7gkss90EkYbyL+4p6
+        h85WJ9xMMNk8LpPHN8Juxmik/HfmFIZD0g4JhvazSFboFBqO0O5qWEj3+w4N2z5m
+        HcvBs6SfET7MZA+dBPW2XG3il+oLUmlrnFfZ4lindZ3nhNoD6jrhMTyRChpekjEx
+        psiU4HfgyKY9yYaRj39Is395NUDHM1rwjV2369NNhRTMIQMyJVfKcgRviqUSZ268
+        kqbKoUgOtslFLmlGR51xIw4U1ewjLKvKsZSrE6/U4EOWFunNRs4pNQ1afhSrkGK8
+        CPz+J3sSboxUsoyN6KQHH4w3DSn0Y63OFxGHYF/EV8mYKk+m1gyn8XmEGzsvIQlY
+        o4+21nyL1AdWCwTIspITLlYZ2gnomtQQsdKcrfNu2cp8zRV6GVRCSNqewyS/ucuJ
+        gM/hFrUufDucXrn6Qyp2lPIsKDu1P+1iXMTaNzEUL9q3O+ZqY+XCKGi7HWUMtT/t
+        QWLfn9A+3EYXC5ETxklU8ZrCR0CHNeJ9MPwUwL9aV8Cg71xnK+lrGabtPKDC4qfS
+        UQHJgdMrO1fWqJPtgrbRWij7XFKcoj6e1uBb2WRhwEv3BBXomTDSWkmgE4ddlEuL
+        JP6YyAdWRNx6YJ2YUJGzZYSzeK/+7Edyd1zJnXMSIFp8OA==
+        =W/jp
+        -----END PGP MESSAGE-----
+      fp: B31C0D06E2C1EB5A
+  encrypted_regex: ^(token|secret|key|secretboxEncryptionSecret)$
+  mac_only_encrypted: true
+  version: 3.11.0

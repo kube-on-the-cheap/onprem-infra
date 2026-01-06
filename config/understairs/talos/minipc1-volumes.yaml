@@ -1,0 +1,11 @@
+---
+apiVersion: v1alpha1
+kind: UserVolumeConfig
+name: openebs-rawfiles
+provisioning:
+  diskSelector:
+    match: disk.transport == "nvme"
+  minSize: 1GiB
+  maxSize: 750GiB
+filesystem:
+  type: ext4

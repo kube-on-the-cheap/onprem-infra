@@ -1,0 +1,203 @@
+# https://taskfile.dev
+
+version: "3"
+
+silent: true
+
+vars:
+  CONFIG_DIR: "{{.TASKFILE_DIR}}"
+  PI1_NODE: "192.168.20.115"
+  PI1_CONFIG: "pi1-controlplane.talos.sops.yaml"
+  MINIPC1_NODE: "192.168.20.116"
+  MINIPC1_CONFIG: "minipc1-worker.talos.sops.yaml"
+  MINIPC1_VOLUMES: "minipc1-volumes.yaml"
+
+tasks:
+  default:
+    cmds:
+      - task -l
+
+  # Pi1 controlplane tasks
+  pi1:apply:
+    desc: Apply config to pi1 controlplane node (dry-run by default)
+    vars:
+      MODE: '{{.MODE | default "dry-run"}}'
+    cmds:
+      - |
+        sops -d {{.CONFIG_DIR}}/{{.PI1_CONFIG}} | \
+          talosctl apply-config \
+            --nodes {{.PI1_NODE}} \
+            --mode {{.MODE}} \
+            --file /dev/stdin
+
+  pi1:apply-reboot:
+    desc: Apply config to pi1 with reboot
+    cmds:
+      - task: pi1:apply
+        vars:
+          MODE: reboot
+
+  pi1:apply-staged:
+    desc: Apply config to pi1 staged (applies on next reboot)
+    cmds:
+      - task: pi1:apply
+        vars:
+          MODE: staged
+
+  pi1:apply-no-reboot:
+    desc: Apply config to pi1 without reboot (immediate, no restart)
+    cmds:
+      - task: pi1:apply
+        vars:
+          MODE: no-reboot
+
+  pi1:diff:
+    desc: Show config diff for pi1 node
+    cmds:
+      - |
+        sops -d {{.CONFIG_DIR}}/{{.PI1_CONFIG}} | \
+          talosctl apply-config \
+            --nodes {{.PI1_NODE}} \
+            --mode try \
+            --dry-run \
+            --file /dev/stdin
+
+  pi1:status:
+    desc: Show status of pi1 node
+    cmds:
+      - talosctl --nodes {{.PI1_NODE}} get machinestatus
+
+  pi1:services:
+    desc: List services on pi1 node
+    cmds:
+      - talosctl --nodes {{.PI1_NODE}} services
+
+  pi1:logs:
+    desc: Tail logs from pi1 node (use SERVICE=kubelet to filter)
+    vars:
+      SERVICE: '{{.SERVICE | default "machined"}}'
+    cmds:
+      - talosctl --nodes {{.PI1_NODE}} logs {{.SERVICE}} -f
+
+  pi1:disks:
+    desc: Show disks on pi1 node
+    cmds:
+      - talosctl --nodes {{.PI1_NODE}} disks
+
+  pi1:volumes:
+    desc: Show volumes on pi1 node
+    cmds:
+      - talosctl --nodes {{.PI1_NODE}} get volumestatus
+
+  # Minipc1 worker tasks
+  minipc1:apply:
+    desc: Apply config to minipc1 worker node (dry-run by default)
+    vars:
+      MODE: '{{.MODE | default "dry-run"}}'
+    cmds:
+      - |
+        { sops -d {{.CONFIG_DIR}}/{{.MINIPC1_CONFIG}}; cat {{.CONFIG_DIR}}/{{.MINIPC1_VOLUMES}}; } | \
+          talosctl apply-config \
+            --nodes {{.MINIPC1_NODE}} \
+            --mode {{.MODE}} \
+            --file /dev/stdin
+
+  minipc1:apply-insecure:
+    desc: Apply config to minipc1 in maintenance mode (insecure)
+    cmds:
+      - |
+        { sops -d {{.CONFIG_DIR}}/{{.MINIPC1_CONFIG}}; cat {{.CONFIG_DIR}}/{{.MINIPC1_VOLUMES}}; } | \
+          talosctl apply-config \
+            --insecure \
+            --nodes {{.MINIPC1_NODE}} \
+            --file /dev/stdin
+
+  minipc1:apply-reboot:
+    desc: Apply config to minipc1 with reboot
+    cmds:
+      - task: minipc1:apply
+        vars:
+          MODE: reboot
+
+  minipc1:apply-staged:
+    desc: Apply config to minipc1 staged (applies on next reboot)
+    cmds:
+      - task: minipc1:apply
+        vars:
+          MODE: staged
+
+  minipc1:apply-no-reboot:
+    desc: Apply config to minipc1 without reboot (immediate, no restart)
+    cmds:
+      - task: minipc1:apply
+        vars:
+          MODE: no-reboot
+
+  minipc1:diff:
+    desc: Show config diff for minipc1 node
+    cmds:
+      - |
+        { sops -d {{.CONFIG_DIR}}/{{.MINIPC1_CONFIG}}; cat {{.CONFIG_DIR}}/{{.MINIPC1_VOLUMES}}; } | \
+          talosctl apply-config \
+            --nodes {{.MINIPC1_NODE}} \
+            --mode try \
+            --dry-run \
+            --file /dev/stdin
+
+  minipc1:status:
+    desc: Show status of minipc1 node
+    cmds:
+      - talosctl --nodes {{.MINIPC1_NODE}} get machinestatus
+
+  minipc1:services:
+    desc: List services on minipc1 node
+    cmds:
+      - talosctl --nodes {{.MINIPC1_NODE}} services
+
+  minipc1:logs:
+    desc: Tail logs from minipc1 node (use SERVICE=kubelet to filter)
+    vars:
+      SERVICE: '{{.SERVICE | default "machined"}}'
+    cmds:
+      - talosctl --nodes {{.MINIPC1_NODE}} logs {{.SERVICE}} -f
+
+  minipc1:disks:
+    desc: Show disks on minipc1 node
+    cmds:
+      - talosctl --nodes {{.MINIPC1_NODE}} disks
+
+  minipc1:volumes:
+    desc: Show volumes on minipc1 node
+    cmds:
+      - talosctl --nodes {{.MINIPC1_NODE}} get volumestatus
+
+  # Cluster-wide tasks
+  cluster:status:
+    desc: Show status of all nodes
+    cmds:
+      - talosctl --nodes {{.PI1_NODE}},{{.MINIPC1_NODE}} get machinestatus
+
+  cluster:members:
+    desc: Show cluster members
+    cmds:
+      - talosctl --nodes {{.PI1_NODE}} get members
+
+  cluster:health:
+    desc: Check cluster health
+    cmds:
+      - talosctl --nodes {{.PI1_NODE}} health
+
+  # Utility tasks
+  decrypt:
+    desc: Decrypt a config file to stdout (use FILE=filename)
+    vars:
+      FILE: '{{.FILE | default .PI1_CONFIG}}'
+    cmds:
+      - sops -d {{.CONFIG_DIR}}/{{.FILE}}
+
+  edit:
+    desc: Edit a config file with SOPS (use FILE=filename)
+    vars:
+      FILE: '{{.FILE | default .PI1_CONFIG}}'
+    cmds:
+      - sops {{.CONFIG_DIR}}/{{.FILE}}
