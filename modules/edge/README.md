@@ -53,11 +53,10 @@ No modules.
 | [routeros_ip_dhcp_server_option.boot_file_pxe_uefi](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/ip_dhcp_server_option) | resource |
 | [routeros_ip_dhcp_server_option.next_server](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/ip_dhcp_server_option) | resource |
 | [routeros_ip_dns.dns](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/ip_dns) | resource |
-| [routeros_ip_firewall_filter.forward_accept_dns_recursor_tcp](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/ip_firewall_filter) | resource |
-| [routeros_ip_firewall_filter.forward_accept_dns_recursor_udp](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/ip_firewall_filter) | resource |
 | [routeros_ip_firewall_filter.forward_accept_established](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/ip_firewall_filter) | resource |
 | [routeros_ip_firewall_filter.forward_accept_ipsec_in](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/ip_firewall_filter) | resource |
 | [routeros_ip_firewall_filter.forward_accept_ipsec_out](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/ip_firewall_filter) | resource |
+| [routeros_ip_firewall_filter.forward_accept_recursor](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/ip_firewall_filter) | resource |
 | [routeros_ip_firewall_filter.forward_drop_dns_tcp](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/ip_firewall_filter) | resource |
 | [routeros_ip_firewall_filter.forward_drop_dns_udp](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/ip_firewall_filter) | resource |
 | [routeros_ip_firewall_filter.forward_drop_doh](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/ip_firewall_filter) | resource |
@@ -107,6 +106,7 @@ No modules.
 | [routeros_ipv6_firewall_filter.input_accept_udp_traceroute](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/ipv6_firewall_filter) | resource |
 | [routeros_ipv6_firewall_filter.input_drop_invalid](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/ipv6_firewall_filter) | resource |
 | [routeros_ipv6_firewall_filter.input_drop_not_lan](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/ipv6_firewall_filter) | resource |
+| [routeros_move_items.forward_chain_order](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/move_items) | resource |
 | [routeros_system_clock.clock](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/system_clock) | resource |
 | [routeros_system_note.note](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/system_note) | resource |
 | [routeros_system_ntp_client.ntp](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/system_ntp_client) | resource |

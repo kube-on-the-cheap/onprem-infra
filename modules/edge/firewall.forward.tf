@@ -28,24 +28,12 @@ resource "routeros_ip_firewall_filter" "forward_accept_established" {
   comment          = "defconf: accept established,related, untracked"
 }
 
-resource "routeros_ip_firewall_filter" "forward_accept_dns_recursor_udp" {
+resource "routeros_ip_firewall_filter" "forward_accept_recursor" {
   chain              = "forward"
   action             = "accept"
-  protocol           = "udp"
-  dst_port           = "53"
   src_address        = "192.168.20.200"
   out_interface_list = routeros_interface_list.wan.name
-  comment            = "Allow DNS from internal recursor"
-}
-
-resource "routeros_ip_firewall_filter" "forward_accept_dns_recursor_tcp" {
-  chain              = "forward"
-  action             = "accept"
-  protocol           = "tcp"
-  dst_port           = "53"
-  src_address        = "192.168.20.200"
-  out_interface_list = routeros_interface_list.wan.name
-  comment            = "Allow DNS from internal recursor"
+  comment            = "Allow all outbound traffic from internal recursor"
 }
 
 resource "routeros_ip_firewall_filter" "forward_drop_dns_udp" {
@@ -135,4 +123,29 @@ resource "routeros_ip_firewall_filter" "forward_drop_wan_not_dstnat" {
   connection_state     = "new"
   in_interface_list    = "WAN"
   comment              = "defconf: drop all from WAN not DSTNATed"
+}
+
+# Enforce forward chain rule ordering.
+# The last element in sequence is the anchor — all preceding rules
+# are placed before it in the specified order.
+resource "routeros_move_items" "forward_chain_order" {
+  resource_name = "routeros_ip_firewall_filter"
+  sequence = concat(
+    [
+      routeros_ip_firewall_filter.forward_accept_ipsec_in.id,
+      routeros_ip_firewall_filter.forward_accept_ipsec_out.id,
+      routeros_ip_firewall_filter.forward_fasttrack.id,
+      routeros_ip_firewall_filter.forward_accept_established.id,
+      routeros_ip_firewall_filter.forward_accept_recursor.id,
+      routeros_ip_firewall_filter.forward_drop_dns_udp.id,
+      routeros_ip_firewall_filter.forward_drop_dns_tcp.id,
+    ],
+    [for host in local.doh_blocked_hosts : routeros_ip_firewall_filter.forward_drop_doh[host].id],
+    [
+      routeros_ip_firewall_filter.forward_drop_dot.id,
+      routeros_ip_firewall_filter.forward_drop_doq.id,
+      routeros_ip_firewall_filter.forward_drop_invalid.id,
+      routeros_ip_firewall_filter.forward_drop_wan_not_dstnat.id,
+    ],
+  )
 }

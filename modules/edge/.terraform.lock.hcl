@@ -6,6 +6,9 @@ provider "registry.terraform.io/terraform-routeros/routeros" {
   constraints = "1.89.0"
   hashes = [
     "h1:Sh7iaFwqfI1zZu2SJk7eyJQNiiPlc1d9oOXyouCZ96E=",
+    "h1:T7xgWrIOLsLN5E7xHL/AEHYHp+Sb0QQqLv+eQeqBBhc=",
+    "h1:n0zSvA34zLlRp9ateMZcBSYMHhvi30YCLAeOe82k+EM=",
+    "h1:tDh2Hgt7hx305VEnE8/ztovMOjJz59sUwXfgk8x6pvw=",
     "zh:0a98fefbe4b8ea71116a234d395439f0168a07e57b1f2a66ace89bc906d2071b",
     "zh:2ca1c4e3ffed3bfb2a129e6b17319dee25d4e6fdbd429165c36172f65bda15dc",
     "zh:4e54ab9011cd276267be82b24d30a0e49973fe56e95f96cd452c95a74a73500b",
