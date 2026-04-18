@@ -24,8 +24,8 @@ resource "routeros_interface_list_member" "lan_bridge" {
 
 locals {
   lan_interfaces = concat(
-    [ for x in range(2,9): format("ether%s",x) ],
-    [ "sfp-sfpplus1" ]
+    [for x in range(2, 9) : format("ether%s", x)],
+    ["sfp-sfpplus1"]
   )
 }
 
@@ -34,7 +34,7 @@ resource "routeros_interface_bridge_port" "lan_interfaces" {
   for_each  = toset(local.lan_interfaces)
   bridge    = routeros_interface_bridge.lan.name
   interface = each.value
-  comment = "Interface ${each.value} belongs to the LAN bridge"
+  comment   = "Interface ${each.value} belongs to the LAN bridge"
 }
 
 # INFO: for comparison, you can do the explicit format, but for the bridge assignment it doesn't make much sense

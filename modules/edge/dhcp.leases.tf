@@ -19,18 +19,36 @@ resource "routeros_ip_dhcp_server_lease" "nas" {
   comment     = "NAS"
 }
 
+# ---
+
+resource "routeros_ip_dhcp_server_lease" "minipc" {
+  address     = "192.168.20.112"
+  mac_address = "48:21:0B:37:9E:00"
+  server      = routeros_ip_dhcp_server.dhcp_server.name
+  comment     = "minipc"
+}
+
+resource "routeros_ip_dhcp_server_lease" "pi4" {
+  address     = "192.168.20.110"
+  mac_address = "D8:3A:DD:B3:86:1C"
+  server      = routeros_ip_dhcp_server.dhcp_server.name
+  comment     = "pi4"
+}
+
+# ---
+
 resource "routeros_ip_dhcp_server_lease" "simpleton" {
   address     = "192.168.20.111"
   mac_address = "42:AE:F3:F6:27:FF"
   # client_id   = "1:42:ae:f3:f6:27:ff"
-  server      = routeros_ip_dhcp_server.dhcp_server.name
-  comment     = "simpleton"
+  server  = routeros_ip_dhcp_server.dhcp_server.name
+  comment = "simpleton"
 }
 
 resource "routeros_ip_dhcp_server_lease" "rainbowparty" {
   address     = "192.168.20.125"
   mac_address = "3C:7C:3F:1D:81:66"
   # client_id   = "1:3c:7c:3f:1d:81:66"
-  server      = routeros_ip_dhcp_server.dhcp_server.name
-  comment     = "RainbowParty"
+  server  = routeros_ip_dhcp_server.dhcp_server.name
+  comment = "RainbowParty"
 }

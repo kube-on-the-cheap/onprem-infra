@@ -1,7 +1,7 @@
 # System Note Configuration
 resource "routeros_system_note" "note" {
   show_at_login = true
-  note = <<-EOT
+  note          = <<-EOT
     ╔════════════════════════════════════════════════╗
     ║         MikroTik Edge Router                   ║
     ║         Unauthorized access prohibited         ║
@@ -34,8 +34,8 @@ resource "routeros_tool_mac_server_winbox" "mac_winbox" {
 # Disk Settings
 resource "routeros_disk_settings" "disk" {
   auto_media_interface = routeros_interface_bridge.lan.name
-  auto_media_sharing   = true
-  auto_smb_sharing     = true
+  auto_media_sharing   = false
+  auto_smb_sharing     = false
 }
 
 # IP Neighbor Discovery Settings
