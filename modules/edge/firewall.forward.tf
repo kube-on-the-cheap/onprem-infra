@@ -76,6 +76,11 @@ locals {
     "doh.applied-privacy.net",
     "doh.cleanbrowsing.org",
     "dns.switch.ch",
+    "dns.microsoft.com",
+    "doh.dns.apple.com",
+    "doh.xfinity.com",
+    "dns.alidns.com",
+    "doh.libredns.gr",
   ]
 }
 
