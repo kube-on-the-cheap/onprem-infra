@@ -11,8 +11,8 @@ locals {
 }
 
 inputs = {
-  flux_version          = "2.7.x"
-  flux_operator_version = "0.37.1"
+  flux_version          = "2.8.x"
+  flux_operator_version = "0.47.0"
   cilium_version        = "1.18.5"
   cluster_name          = "understairs"
   sync = {

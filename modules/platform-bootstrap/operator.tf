@@ -13,6 +13,10 @@ resource "helm_release" "flux_operator" {
   wait             = true
   version          = var.flux_operator_version
 
+  depends_on = [
+    helm_release.cilium
+  ]
+
   lifecycle {
     precondition {
       condition     = one(data.kubernetes_namespace.kube_system.metadata.*.uid) != null
