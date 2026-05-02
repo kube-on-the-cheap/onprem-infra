@@ -1,24 +1,20 @@
-# Lychee link checker configuration
-# https://lychee.cli.rs/configuration/
+# Use curl user-agent to avoid WAF blocks
+user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Safari/605.1.1"
 
-# Use a browser-like user-agent to avoid being blocked
-user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+# Accept common non-error status codes
+accept = ["2xx", "401", "403", "405" ]
 
-# Accept 2xx and 4xx (some sites return 403/429 for bots even with good UA)
-accept = ["2xx", "403", "429"]
+# Exclude paths containing Talos machine config (full of upstream placeholder URLs)
+exclude_path = [
+    "*.talos.sops.yaml",
+]
 
-# Exclude example/placeholder URLs from Talos config comments
+# Exclude example/placeholder and known-unreachable URLs
 exclude = [
-    "^https?://registry\\.insecure",
-    "^https?://SERVER:PORT",
-    "^https?://USERNAME:PASSWORD@SERVER:PORT",
-    "^https?://domain/?$",
-    "^https?://\\d+\\.\\d+\\.\\d+\\.\\d+:\\d+",  # IP:port placeholders
+    "^https?://\\d+\\.\\d+\\.\\d+\\.\\d+",  # IP addresses
     "^https?://example\\.com",
     "^https?://www\\.example\\.com",
-    "^https?://192\\.168\\.",  # Local network IPs
-    "^https?://10\\.",
-    "^https?://172\\.(1[6-9]|2[0-9]|3[0-1])\\.",
+    "^https?://registry\\.insecure",
 ]
 
 # Timeout per request

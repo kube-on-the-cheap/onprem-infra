@@ -13,7 +13,7 @@ default_stages:
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       # Linting
       - id: check-yaml
@@ -42,7 +42,7 @@ repos:
         args: ["-S", "warning"]
 
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.97.4
+    rev: v1.105.0
     hooks:
       - id: terragrunt_fmt
       - id: terraform_providers_lock
@@ -73,7 +73,7 @@ repos:
           - --hook-config=--create-file-if-not-exist=true
 
   - repo: https://github.com/compilerla/conventional-pre-commit
-    rev: v4.0.0
+    rev: v4.4.0
     hooks:
       - id: conventional-pre-commit
         stages:
@@ -81,7 +81,7 @@ repos:
         args: [feat, fix, update, chore, test, docs, nit]
 
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.24.0
+    rev: v8.30.0
     hooks:
       # Leaks check
       - id: gitleaks
@@ -89,13 +89,13 @@ repos:
           - pre-push
 
   - repo: https://github.com/python-jsonschema/check-jsonschema.git
-    rev: 0.31.2
+    rev: 0.37.1
     hooks:
       # GitHub Schema check
       - id: check-github-workflows
 
   - repo: https://github.com/lycheeverse/lychee.git
-    rev: v0.15.1
+    rev: lychee-v0.24.2
     hooks:
       # Link checks
       - id: lychee
