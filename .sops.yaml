@@ -4,7 +4,7 @@ keys:
   - &Marco_age_backup age1k9pgstv92fnq4mpupu2msd9j7zvv96l07ueqfckrv3nwq94t7vzq7typqx
 creation_rules:
   - path_regex: config/understairs/talos/.*\.sops(?:\.yaml)?$
-    encrypted_regex: ^(token|secret|key|secretboxEncryptionSecret)$
+    encrypted_regex: ^(token|secret|key|password|secretboxEncryptionSecret)$
     mac_only_encrypted: true
     key_groups:
       - pgp:
