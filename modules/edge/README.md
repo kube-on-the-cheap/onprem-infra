@@ -56,7 +56,6 @@ No modules.
 | [routeros_ip_firewall_filter.forward_accept_established](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/ip_firewall_filter) | resource |
 | [routeros_ip_firewall_filter.forward_accept_ipsec_in](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/ip_firewall_filter) | resource |
 | [routeros_ip_firewall_filter.forward_accept_ipsec_out](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/ip_firewall_filter) | resource |
-| [routeros_ip_firewall_filter.forward_accept_recursor](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/ip_firewall_filter) | resource |
 | [routeros_ip_firewall_filter.forward_drop_dns_tcp](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/ip_firewall_filter) | resource |
 | [routeros_ip_firewall_filter.forward_drop_dns_udp](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/ip_firewall_filter) | resource |
 | [routeros_ip_firewall_filter.forward_drop_doh](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/ip_firewall_filter) | resource |
@@ -65,6 +64,8 @@ No modules.
 | [routeros_ip_firewall_filter.forward_drop_invalid](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/ip_firewall_filter) | resource |
 | [routeros_ip_firewall_filter.forward_drop_wan_not_dstnat](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/ip_firewall_filter) | resource |
 | [routeros_ip_firewall_filter.forward_fasttrack](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/ip_firewall_filter) | resource |
+| [routeros_ip_firewall_filter.input_accept_dns_tcp](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/ip_firewall_filter) | resource |
+| [routeros_ip_firewall_filter.input_accept_dns_udp](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/ip_firewall_filter) | resource |
 | [routeros_ip_firewall_filter.input_accept_established](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/ip_firewall_filter) | resource |
 | [routeros_ip_firewall_filter.input_accept_icmp](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/ip_firewall_filter) | resource |
 | [routeros_ip_firewall_filter.input_accept_loopback](https://registry.terraform.io/providers/terraform-routeros/routeros/1.89.0/docs/resources/ip_firewall_filter) | resource |

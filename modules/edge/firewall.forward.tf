@@ -28,14 +28,6 @@ resource "routeros_ip_firewall_filter" "forward_accept_established" {
   comment          = "defconf: accept established,related, untracked"
 }
 
-resource "routeros_ip_firewall_filter" "forward_accept_recursor" {
-  chain              = "forward"
-  action             = "accept"
-  src_address        = "192.168.20.200"
-  out_interface_list = routeros_interface_list.wan.name
-  comment            = "Allow all outbound traffic from internal recursor"
-}
-
 resource "routeros_ip_firewall_filter" "forward_drop_dns_udp" {
   chain              = "forward"
   action             = "drop"
@@ -141,7 +133,6 @@ resource "routeros_move_items" "forward_chain_order" {
       routeros_ip_firewall_filter.forward_accept_ipsec_out.id,
       routeros_ip_firewall_filter.forward_fasttrack.id,
       routeros_ip_firewall_filter.forward_accept_established.id,
-      routeros_ip_firewall_filter.forward_accept_recursor.id,
       routeros_ip_firewall_filter.forward_drop_dns_udp.id,
       routeros_ip_firewall_filter.forward_drop_dns_tcp.id,
     ],

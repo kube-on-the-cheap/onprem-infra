@@ -14,7 +14,7 @@ resource "routeros_ip_dhcp_server" "dhcp_server" {
 resource "routeros_ip_dhcp_server_network" "lan" {
   address = "192.168.20.0/24"
   # boot_file_name = "undionly.kpxe"
-  dns_server  = ["192.168.20.200"]
+  dns_server  = ["192.168.20.1"]
   gateway     = "192.168.20.1"
   netmask     = 24
   next_server = "192.168.20.200"

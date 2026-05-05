@@ -36,6 +36,24 @@ resource "routeros_ip_firewall_filter" "input_accept_tftp_pxe" {
   comment           = "Temporary: Allow TFTP for PXE boot"
 }
 
+resource "routeros_ip_firewall_filter" "input_accept_dns_udp" {
+  chain             = "input"
+  action            = "accept"
+  protocol          = "udp"
+  dst_port          = "53"
+  in_interface_list = routeros_interface_list.lan.name
+  comment           = "Allow DNS queries from LAN"
+}
+
+resource "routeros_ip_firewall_filter" "input_accept_dns_tcp" {
+  chain             = "input"
+  action            = "accept"
+  protocol          = "tcp"
+  dst_port          = "53"
+  in_interface_list = routeros_interface_list.lan.name
+  comment           = "Allow DNS queries from LAN (TCP)"
+}
+
 resource "routeros_ip_firewall_filter" "input_drop_not_lan" {
   chain             = "input"
   action            = "drop"
