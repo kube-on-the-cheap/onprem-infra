@@ -8,7 +8,7 @@ machine:
     crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJQekNCOHFBREFnRUNBaEVBdWh6OW5IRHFOanFjQTNDRkhoRkZrakFGQmdNclpYQXdFREVPTUF3R0ExVUUKQ2hNRmRHRnNiM013SGhjTk1qVXdPREkwTVRVek56TTJXaGNOTXpVd09ESXlNVFV6TnpNMldqQVFNUTR3REFZRApWUVFLRXdWMFlXeHZjekFxTUFVR0F5dGxjQU1oQUJXWk52ekUzK2RLanJKYjA2UzV0N0JUdXd6TFlGVUNGZHNjCjlRdzduM3IzbzJFd1h6QU9CZ05WSFE4QkFmOEVCQU1DQW9Rd0hRWURWUjBsQkJZd0ZBWUlLd1lCQlFVSEF3RUcKQ0NzR0FRVUZCd01DTUE4R0ExVWRFd0VCL3dRRk1BTUJBZjh3SFFZRFZSME9CQllFRkRaTncyb2IvK0NQbzJSTQp6My9hWVEwK0VBR21NQVVHQXl0bGNBTkJBREtSTzBRYlByUDFscGdleHFodFk0d09ZUFpiaVJoVjEzeXJYQUc5CmUxeE00N212M1VCeStvcWRSL0diQ044RmdoS1VpNUJhMExCVExLYitacGF6MUFrPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
   certSANs: []
   kubelet:
-    image: ghcr.io/siderolabs/kubelet:v1.33.0
+    image: ghcr.io/siderolabs/kubelet:v1.34.6
     defaultRuntimeSeccompProfileEnabled: true
     disableManifestsDirectory: true
     extraMounts:
@@ -23,7 +23,7 @@ machine:
     hostname: minipc1
   install:
     disk: /dev/sda
-    image: ghcr.io/siderolabs/installer:v1.10.1
+    image: ghcr.io/siderolabs/installer:v1.13.0
     wipe: false
   registries: {}
   features:
@@ -46,7 +46,7 @@ cluster:
   id: 4LIl1i1ULF2cBcU57RDbqrSkyxXQu5k_S29ffunxilY=
   secret: ENC[AES256_GCM,data:BDCaWILDfuIqXBcGsYnRgTNSiJTYoDnX4KybsAJc/yKRh0kWw87GjUd4Qi4=,iv:OJUNSeVF3Qz6OS+iZ6JtROJM7OII3owxR4wGGzRTfFU=,tag:6O8EtmOPQmni/M1vcU4sUA==,type:str]
   controlPlane:
-    endpoint: https://192.168.20.115:6443
+    endpoint: https://192.168.20.110:6443
   clusterName: understairs
   network:
     cni:
@@ -77,8 +77,8 @@ sops:
         eVVSU3h4bFlRTVJxc0wzT0VZVzlBREkKk0TBf57Q5u/U9SASWSwT+F5r5crXwIS8
         axqBjZSGLcoU1w7UpuX2cILhHJ2npyycfpD+TwcQ6IQVFTRsEENPhw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-01-06T13:28:33Z"
-  mac: ENC[AES256_GCM,data:olxyefmWxGCtVvNMbOFuOq4OFUzxnF+Rw9BYoE66YYMJ0MaQZBaix47MyzDl1X4N9d+zn8ZLABJFSOIgw45rm4PMqpvP0iwvr/MKuh7OI2V7l6prjOzlF4/5MdJb1Et668/NoUyE5aopfDWScEQ9mbZ2Y8FlKbFUw9gmKWCTVW0=,iv:3fDgizdiKGCGGkgbo8wplJNY1OTa9RKmYgAC8DQ3I3Q=,tag:0MWrdFYXOHor/PqqXCIgdg==,type:str]
+  lastmodified: "2026-05-04T16:13:55Z"
+  mac: ENC[AES256_GCM,data:SMU8csNmoq8c4NibeHNRUbPIZrIcOW7SpJcm3reEp5+Sf1771WfTxQup5OwnvUe4Lqjw5Fq/v9tpdyKbBki2/lPbyhQnfcotMZh5fH4jICyoUNhWCM2Geg8WxMMy7RN2hUbDfRYiiYtXkIoFwX2UZ7IYucDZqqn8vzz47iNsVqg=,iv:Y5y8NWh+AqiAyldxMz4Mci/1h5MnakJB/dNbkq4CHYI=,tag:lFkdlCsOPlh5B/XHrKpLJw==,type:str]
   pgp:
     - created_at: "2026-01-06T13:28:33Z"
       enc: |-
