@@ -5,7 +5,10 @@ provider "registry.terraform.io/terraform-routeros/routeros" {
   version     = "1.99.1"
   constraints = "1.99.1"
   hashes = [
+    "h1:1KWPcLddi3UAXMa7ZFi/IcniAOnMaRgxSreQgY5UpvU=",
     "h1:5djJeu4l5UiJKbvTy02ZtrizymGivxOtl9oLR1uCSyE=",
+    "h1:DweIuEd2oFIBgsc8oAsPR/X4ioHmXBH0UsSMJGtp0uc=",
+    "h1:slX5FrpPj7cboNLs4mb8UULrEqO18Q41SleUc2SaaXg=",
     "zh:1d94c6bfa50af17b02608b9dc050767aaaf665bb03fd6ef5dcb0ed20153d0349",
     "zh:224f0a7828291e9535769706a1fae30c10fd15cd3fdcb8094fdffcb83f91671b",
     "zh:3765f09dd024c39cb850a8f6e6d3cc3a3018ece1209e7b7473a489d639e12c8f",

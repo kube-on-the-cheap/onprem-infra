@@ -1,10 +1,10 @@
 terraform {
-  source = "../../..//modules/mikrotik/edge/"
+  source = "../../..//modules/mikrotik/downstairs/"
 
   extra_arguments "provider_config" {
     commands = ["plan", "apply", "refresh", "import"]
     env_vars = {
-      MIKROTIK_HOST     = "http://192.168.20.1"
+      MIKROTIK_HOST     = "http://192.168.20.11"
       MIKROTIK_USER     = local.tg_credentials.username
       MIKROTIK_PASSWORD = local.tg_credentials.password
       MIKROTIK_INSECURE = true
@@ -23,7 +23,6 @@ locals {
 
 inputs = {
   admin_ssh_public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEKuPV6H09Xnq05D3+kfJNVBKKZqXIB5+lGaYvg3Htuc marco@simpleton"
-  pppoe_credentials    = yamldecode(sops_decrypt_file("./pppoe_credentials.sops.yaml"))
   home_assistant_credentials = {
     username = local.hass_credentials.username
     password = local.hass_credentials.password
